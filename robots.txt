@@ -1,0 +1,21 @@
+
+User-agent: *
+
+Disallow: /index.php
+Disallow: /assests/*
+Disallow: /modules/*
+Disallow: /cart/add_to_wishlist/
+Disallow: /cart
+Disallow: /users/login
+Disallow: /users/forgotten_password
+Disallow: /users/register
+Disallow: /users/register/
+Disallow: /users/login/
+Disallow: /sitepanel/
+Disallow: /assets/sitepanel/*
+Disallow: /index/*
+Disallow : /category_listing/*
+Disallow: /products_listing/*
+Disallow: /category-test/*
+
+Sitemap: https://www.amefitequipment.com/sitemap.xml

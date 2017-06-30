@@ -1,0 +1,78 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="topbg">
+<div class="container">
+<div class="row">
+  <p class="col-lg-6 col-md-6 col-sm-6 hidden-xs pt3 p0 white"><img src="../images/mobile.png" alt="Mobile" class="vam"> 866-AME-3889 <img src="../images/email.png" alt="Email ID" class="vam ml15 mr3"> info@amefitequipment.com </p>
+  <div class="col-lg-6 col-md-6 col-sm-6 p0">
+  <div class="search-area">
+    	<p class="show-hide"><a href="javascript:void(0)" title="Search"><img src="../images/search-icon.jpg" alt="Search"></a></p>
+        <div class="search-field"><input name="" type="text" placeholder="Keyword Search" style="width:190px;"> <input name="" type="button" value="GO" class="btn-style" style="padding:6px;"></div>
+    </div><div class="white cart-top"><a href="../shopping-cart.htm" title="Shopping Cart">0</a></div> 
+  		        <p class="white reg-log"><a href="../packages-listing.htm" title="Warranty">Packages</a></p>
+                <p class="white reg-log"><a href="../warranty.htm" title="Warranty">Warranty</a></p>
+                <p class="white reg-log"><a href="../signin.htm" title="Register / login">Register / login</a></p>        
+  		 
+    	
+  </div>
+  <p class="clearfix"></p>
+</div>
+</div>
+</div>
+
+<!--Header-->
+<header>
+<div class="rel inn-header">
+<div class="w100 abs" style="z-index:999;">
+<div class="container">
+<div class="row">
+	<p class="logo-area-inn"><a href="../index.htm" title="AME Fitness Equipment"><img src="../images/ame.png" alt="AME Fitness Equipment"></a></p>
+    
+    <div class="menu">
+      <div class="navbar-header white">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <img src="../images/menu.gif" alt="Navigation"> Navigation</button>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse" style="margin:0; padding:0;">
+        <ul class="nav navbar-nav menulink">
+          <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" title="Cardio">Cardio<br class="hidden-sm hidden-xs"><span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="../listing.htm" title="Treadmills">Treadmills</a></li>
+              <li><a href="../listing.htm" title="Elliptical Machine">Elliptical Machine</a></li>
+              <li><a href="../listing.htm" title="Exercise Bikes">Exercise Bikes</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" title="Strength">Strength<br class="hidden-sm hidden-xs"><span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="../listing.htm" title="Treadmills">Treadmills</a></li>
+              <li><a href="../listing.htm" title="Elliptical Machine">Elliptical Machine</a></li>
+              <li><a href="../listing.htm" title="Exercise Bikes">Exercise Bikes</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" title="Free Weight">Free Weight<br class="hidden-sm hidden-xs"><span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="../listing.htm" title="Treadmills">Treadmills</a></li>
+              <li><a href="../listing.htm" title="Elliptical Machine">Elliptical Machine</a></li>
+              <li><a href="../listing.htm" title="Exercise Bikes">Exercise Bikes</a></li>
+            </ul>
+          </li>
+          <li><a href="../sub-category.htm" title="Gym Packages">Gym Packages</a></li>
+          <li><a href="../sub-category.htm" title="Flooring">Flooring</a></li>
+          <li><a href="../sub-category.htm" title="Replacement Padding">Replacement Padding</a></li>          
+          <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" title="More">More<br class="hidden-sm hidden-xs"><span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="../listing.htm" title="Treadmills">Treadmills</a></li>
+              <li><a href="../listing.htm" title="Elliptical Machine">Elliptical Machine</a></li>
+              <li><a href="../listing.htm" title="Exercise Bikes">Exercise Bikes</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>                                    
+    
+    <p class="clearfix"></p>
+</div>
+</div>
+</div>
+
+</div>
+</header>
+<!--Header end-->

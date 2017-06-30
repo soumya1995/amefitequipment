@@ -1,0 +1,273 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * SSL Helpers
+ *
+ * @author		dkmaurya 
+ * @version		1.0
+ * @license		MIT License Copyright (c) 2010
+ */
+
+// ------------------------------------------------------------------------
+
+if ( ! function_exists('Image_thumb'))
+{
+	/*	
+		
+	R - Image Resizing
+    C - Image Cropping
+    X - Image Rotation
+    W - Image Watermarking		
+	
+	 $config['master_dim']  options = auto, width, height
+	 
+	 echo $this->image_lib->display_errors();
+	 
+	 $this->image_lib->display_errors('<p>', '</p>');	 
+	 
+	 echo get_image('album_images',$row->photo1,200,150,'R'); 
+	 R, AR 	 
+	  
+   */
+	
+	function Image_thumb($thumb=array(),$perform='R')
+	{			
+		
+		$ci = &get_instance();	
+		$ci->load->library('image_lib');
+		
+			$config['image_library']   =  'gd2';
+			$config['create_thumb']    =  TRUE;
+			$config['thumb_marker']    =  FALSE;	
+			$config['source_image']    =  $thumb['source_path'].$thumb['org_image'];
+			$config['width']  =  $thumb['width'];
+			$config['height'] =  $thumb['height'];
+			$thum_img_name          =   "thumb_".$thumb['width']."_".$thumb['height']."_".$thumb['org_image'];	
+			$config['new_image']    =   IMG_CACH_DIR."/".$thum_img_name;
+			
+			if(@$thumb['image'] == "water-logo.png")
+			{
+				$image = FALSE;
+			}else{
+				$image = TRUE;
+			}
+			
+        if(!file_exists(IMG_CACH_DIR."/".$thum_img_name) )
+		{
+			if ( $perform=='C')
+			{
+			    list($original_width, $original_height, $file_type, $attr) = @getimagesize($config['source_image']);	
+				
+				/*	
+				use if you want to crop image from centre 
+													
+			    $crop_x = ($original_width / 2) - ($thumb['width'] / 2);
+			    $crop_y = ($original_height / 2) - ($thumb['height'] / 2);			
+				$config['x_axis'] = $thumb['width'];
+				$config['y_axis'] = $thumb['height'];	
+							
+				*/	
+							
+			    $ratio       =  $original_width/$original_height;
+				$thumbRatio  =  $thumb['width'] / $thumb['height'];
+				
+				if( $ratio < $thumbRatio )
+				{					
+				   $srcHeight        = round($original_height*$ratio/$thumbRatio);				
+				   $config['y_axis'] = round(($original_height-$srcHeight)/2);
+				
+				} else
+				{
+					
+				  $srcWidth          = round($original_width*$thumbRatio/$ratio);
+				  $config['x_axis']  = round(($original_width-$srcWidth)/2);
+				  
+				}
+								
+				$config['maintain_ratio'] = FALSE;
+				if($image===TRUE)
+				{	
+					//img_watermark($config['source_image']);			
+				}
+				$ci->image_lib->initialize($config); 
+		     	$ci->image_lib->crop();
+				$ci->image_lib->clear();
+			
+			}	
+			
+			if ( $perform=='AR')
+			{
+			    $config['ar_width']       = $thumb['width']; 
+			    $config['ar_height']      = $thumb['height'];	
+				$config['maintain_ratio'] = FALSE;	
+				$config['master_dim']     = "height";
+												
+				if ($thumb['width'] > $thumb['height'] )
+				{					
+				   $config['master_dim'] = "width";
+				  
+				}
+				if($image===TRUE)
+				{	
+					//img_watermark($config['source_image']);			
+				}		
+				$ci->image_lib->initialize($config); 
+		     	$ci->image_lib->adaptive_resize();
+				$ci->image_lib->clear();
+			
+			}	
+						
+			if ( $perform=='R')
+			{
+
+				list($original_width, $original_height, $file_type, $attr) = @getimagesize($config['source_image']);				 
+				$config['width']   = ( $thumb['width'] >=$original_width ) ? $original_width     : $thumb['width'] ;		
+				$config['height']  = ( $thumb['height'] >=$original_height ) ? $original_height  : $thumb['height'] ;				
+				$config['maintain_ratio'] = TRUE;
+				if($image===TRUE)
+				{	
+					//img_watermark($config['source_image']);			
+				}
+				$ci->image_lib->initialize($config); 
+		     	$ci->image_lib->resize();
+				$ci->image_lib->clear(); 
+			
+			}
+					   
+		}
+	   
+	}
+   	
+}
+
+
+if ( ! function_exists('get_image'))
+{
+  function get_image($dir="",$image="",$w=50,$h=50,$option='R')
+  {	 
+   	 
+		$ci  = &get_instance();
+		$ci->load->helper(array('thumbnail'));		
+		$the_img = theme_url()."images/noimg1.gif"; 	
+			
+	 	if($dir!='')
+		{
+			    $thumbc                 =  array();				
+				$thumbc['width']        =  $w;
+				$thumbc['height']       =  $h;
+				$thumbc['source_path']  = UPLOAD_DIR.'/'.$dir.'/';
+				$thumbc['image'] = $image;
+				
+				/*
+				if(!in_array($dir,array('slidebanner','banner','currency')))
+				{
+				  $thumbc['watermark'] = TRUE;
+				  
+				}
+				else
+				{
+				  $thumbc['watermark'] = FALSE;
+				}
+				*/				
+				$file_path  = UPLOAD_DIR.'/'.$dir."/$image";	
+			    
+			   if($image!="" && file_exists($file_path))
+			   {		   
+					$thumbc['org_image']   =   $image;  				
+					Image_thumb($thumbc,$option);			
+					$cache_file = "thumb_".$thumbc['width']."_".$thumbc['height']."_".$image;
+					 $imgbCachePath = UPLOAD_DIR."/thumb_cache/".$cache_file;
+					
+					if( ($image!='') && ( file_exists($imgbCachePath) ) ) 
+					{
+						 $the_img = thumb_cache_url().$cache_file; 
+						
+					}
+					
+			   }else
+			   {
+				   				
+					$thumbc                 =  array();	
+					//$thumbc['watermark'] = FALSE;			
+					$thumbc['width']        =  $w;
+					$thumbc['height']       =  $h;
+					$thumbc['source_path']  =  FCROOT."assets/developers/images/";	
+					$thumbc['org_image']    =  "noimg1.gif";  				
+					Image_thumb($thumbc,$option);			
+					$cache_file = "thumb_".$thumbc['width']."_".$thumbc['height']."_".$thumbc['org_image'];
+					$imgbCachePath = UPLOAD_DIR."/thumb_cache/".$cache_file;
+					
+					if(  file_exists($imgbCachePath)  ) 
+					{
+						  $the_img = thumb_cache_url().$cache_file; 
+						
+					}
+				   
+			   }
+			  
+			 	 
+		 }
+		 
+	   return $the_img;
+	
+	}
+	
+	
+	if ( ! function_exists('img_watermark'))
+	{
+    function img_watermark($filename)
+		{
+		$ci = &get_instance();
+
+		$ci->load->library('image_lib');
+		//echo $filename;exit;	
+		
+		$path = FCROOT."assets/designer/themes/default/images/";
+		//$img_dim_arr = getimagesize($filename);
+		//$img_w = $img_dim_arr[0];
+		//trace($img_dim_arr);
+		
+		$fontsize = 700;
+
+		//echo "---".$fontsize;
+		//echo '<br />';
+		$config['source_image']   = $filename;
+		$config['wm_type'] = 'overlay';
+		
+		$dimention = getimagesize($filename);
+		$width = ($dimention[0]) ? $dimention[0]: '500';
+		//$height = ($dimention[1]) ? $dimention[1]: '370';
+		
+		//$water_thumb = get_image('water_mark_logo','water-logo.png',$width,$height,'R');
+		//$water_file_name = "thumb_".$width."_".$height."_water-logo.png";
+		
+		if($ci->input->post('logo_type')=="number")
+		{
+			//$water_img_name = ($width>285) ? $path.'water-mini.png': $path.'water-mini.png';
+			$water_img_name = $path.'weter-number.png';
+		}else{
+			$water_img_name = ($width>285) ? $path.'water.png': $path.'water-mini.png';
+		}
+		
+		$config['wm_overlay_path'] = $water_img_name;//FCROOT.'uploaded_files/thumb_cache/'.$water_file_name;//$path.'water-logo.png';//the overlay image
+		
+		$config['wm_opacity']=100;
+		$config['wm_vrt_alignment'] = 'middle';
+		$config['wm_hor_alignment'] = 'center';
+		//$config['wm_x_transp'] = '150';
+  		//$config['wm_y_transp'] = '140';
+
+		$image_cfg['create_thumb'] = FALSE;
+		$ci->image_lib->initialize($config);
+		$ci->image_lib->watermark();
+		$ci->image_lib->clear();
+
+    	}
+	
+	 } 
+
+	
+
+} 
+
+/* End of file thumbnail_helper.php */
+/* Location: ./application/helpers/thumbnail_helper.php */

@@ -1,0 +1,1 @@
+<?php echo popup_invoice_content();?>

@@ -1,0 +1,11 @@
+# -FrontPage-
+
+Options None
+
+<Limit GET POST PUT DELETE>
+order deny,allow
+deny from all
+</Limit>
+AuthName trainingstationli.com
+AuthUserFile /home/traini1/public_html/_vti_pvt/service.pwd
+AuthGroupFile /home/traini1/public_html/_vti_pvt/service.grp

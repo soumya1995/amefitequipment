@@ -1,0 +1,16 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><header class="minmax">
+<div class="container">
+<div class="row">
+  <p class="col-xs-3 p0" title="Dom Shops"><a href="../index.htm"><img src="../images/Domestic-shops.jpg" alt="Dom Shops"></a></p>
+  <div class="col-xs-9 p0">
+  	<p class="search"><select>
+  	  <option>All category</option>
+  	</select><input type="text" placeholder="Search Here...">
+    <input type="button" class="search-btn vat" title="Search">
+    <select class="text-uppercase" style="width:107px;">
+  	  <option>Advanced</option>
+  	</select> <a href="#" class="shop" title="SHOP">SHOP</a></p>
+  </div>
+</div>
+</div>
+</header>

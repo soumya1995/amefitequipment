@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Allow: http://www.domain.com/seo/sitemap.xml
+Disallow: /cart/add_to_wishlist/
+Disallow: /cart
+Disallow: /users/login
+Disallow: /users/forgotten_password
+Disallow: /users/register
+Disallow: /users/register/
+Disallow: /users/login/
+Disallow: /users/login?ref=
